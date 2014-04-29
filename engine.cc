@@ -11,6 +11,7 @@
 
 img::EasyImage generate_image(const ini::Configuration &configuration)
 {
+<<<<<<< HEAD
     vec2f p1(0.0,0.0);
     vec2f p2(20.0,20.0);
     Line myline();
@@ -21,10 +22,24 @@ img::EasyImage generate_image(const ini::Configuration &configuration)
 	std::cout << image_w << image_h << std::endl;
 
 	img::EasyImage image(image_w,image_h);
+=======
+    unsigned int image_w = configuration["ImageProperties"]["width"].as_int_or_default(256);
+    unsigned int image_h = configuration["ImageProperties"]["height"].as_int_or_default(256);
+
+    img::EasyImage image(image_w,image_h);
+>>>>>>> refs/remotes/origin/master
 
 	std::string type = configuration["General"]["type"].as_string_or_default("dieter is een topper");
 	std::cout << type << std::endl;
 	if( type == "IntroColorRectangle"){
+<<<<<<< HEAD
+=======
+        unsigned int image_w = configuration["ImageProperties"]["width"].as_int_or_default(256);
+        unsigned int image_h = configuration["ImageProperties"]["height"].as_int_or_default(256);
+        std::cout << image_w << image_h << std::endl;
+        img::EasyImage image(image_w,image_h);
+
+>>>>>>> refs/remotes/origin/master
 		for(unsigned int i = 0; i < image_h; i++){
 			for(unsigned int j = 0; j < image_w; j++){
 				image(i,j).red = i;
@@ -32,10 +47,22 @@ img::EasyImage generate_image(const ini::Configuration &configuration)
 				image(i,j).blue = (i+j)%256;
 			}
 		}
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> refs/remotes/origin/master
 	}
 
 	
 	else if(type == "IntroBlocks"){
+<<<<<<< HEAD
+=======
+        unsigned int image_w = configuration["ImageProperties"]["width"].as_int_or_default(256);
+        unsigned int image_h = configuration["ImageProperties"]["height"].as_int_or_default(256);
+        std::cout << image_w << image_h << std::endl;
+        img::EasyImage image(image_w,image_h);
+>>>>>>> refs/remotes/origin/master
 
 		std::vector<double> white = configuration["BlockProperties"]["colorWhite"];
 		std::vector<double> black = configuration["BlockProperties"]["colorBlack"];
@@ -61,10 +88,39 @@ img::EasyImage generate_image(const ini::Configuration &configuration)
 				}
 			}
 		}
+<<<<<<< HEAD
 	}
     img::Color kleur(20,80,50);
     image.draw_line(0,0,20,20,kleur);
 	return image;
+=======
+
+
+    }else if(type == "2DLSystem"){
+        unsigned int size = configuration["General"]["size"].as_int_or_default(256);
+        Color backgroundcolor = Color(configuration["General"]["backgroundcolor"].as_double_tuple_or_die());
+        img::EasyImage image(size,size);
+        setBackground(backgroundcolor, image);
+
+        std::cout << "lolz" <<image.get_width() << image.get_height() << std::endl;
+        Lines2D lines = {};
+
+        //testcode
+        /*
+        lines.push_back(Line(vec2f(0,0),vec2f(900,900)));
+        lines.push_back(Line(vec2f(155,22),vec2f(900,678)));
+        lines.push_back(Line(vec2f(690,580),vec2f(0,18)));
+        lines.push_back(Line(vec2f(5,580),vec2f(500,18)));
+        lines.push_back(Line(vec2f(7,800),vec2f(7,7000)));
+        */
+
+
+        draw2DLines(lines,image);
+        return image;
+    }
+    std::cout << image.get_width() << image.get_height() << std::endl;
+    return image;
+>>>>>>> refs/remotes/origin/master
 }
 
 
